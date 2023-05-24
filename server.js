@@ -1,7 +1,12 @@
-FROM node:13-slim
+const express = require('express');
+const app = express();
 
-WORKDIR /app
+app.get('/', (req, res) => {
+  const name = process.env.NAME || 'World';
+  res.send(`Hello ${name}!`);
+});
 
-ADD . /app
-
-CMD node server.js
+const port = parseInt(process.env.PORT) || 8080;
+app.listen(port, () => {
+  console.log(`helloworld: listening on port ${port}`);
+});
